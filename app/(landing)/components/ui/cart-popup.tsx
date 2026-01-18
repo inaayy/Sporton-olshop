@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Button from "./button";
 import { FiArrowRight, FiTrash2 } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 export const cartList = [
   {
@@ -34,7 +35,13 @@ export const cartList = [
 ];
 
 const CartPopup = () => {
+  const { push } = useRouter();
+
   const totalPrice = cartList.reduce((total, item) => total + item.price * item.qty, 0);
+
+  const handleCheckout = () => {
+    push("/checkout");
+  };
   return (
     <div className="absolute bg-white right-0 top-12 shadow-xl shadow-black/10 border border-gray-200 w-80 z-10">
       <div className="p-4 border-b border-gray-200 font-bold text-center">Shopping Cart</div>
@@ -81,7 +88,7 @@ const CartPopup = () => {
             </div>
           </div>
         </div>
-        <Button variant="dark" size="small" className="w-full mt-4">
+        <Button variant="dark" size="small" className="w-full mt-4" onClick={handleCheckout}>
           Checkout Now
           <FiArrowRight />
         </Button>
