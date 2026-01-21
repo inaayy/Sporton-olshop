@@ -9,27 +9,6 @@ const categoryList = [
         name: "running",
         imgUrl: "category-running.svg",
     }]
-//     {
-//         name: "tennis",
-//         imgUrl: "category-tennis.svg",
-//     },
-//     {
-//         name: "basketball",
-//         imgUrl: "category-basketball.svg",
-//     },
-//     {
-//         name: "football",
-//         imgUrl: "category-football.svg",
-//     },
-//     {
-//         name: "badminton",
-//         imgUrl: "category-badminton.svg",
-//     },
-//     {
-//         name: "swimming",
-//         imgUrl: "category-swimming.svg",
-//     }
-// ]
 
 type TCategoriesProps = {
     categories: Category[];
