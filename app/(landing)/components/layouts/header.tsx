@@ -5,8 +5,10 @@ import Link from "next/link";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import CartPopup from "../ui/cart-popup";
 import { useState } from "react";
+import { useCartStore } from "@/app/hooks/use-cart-store";
 
 const Header = () => {
+  const {items} = useCartStore();
   const [isCartPopupOpen, setIsCartPopupOpen] = useState(false);
 
   return (
@@ -30,9 +32,11 @@ const Header = () => {
           <FiSearch size={24} />
           <div className="relative cursor-pointer" onClick={() => setIsCartPopupOpen(!isCartPopupOpen)}>
             <FiShoppingBag size={24} />
+            { items.length ? (
             <div className="bg-primary rounded-full w-3.5 h-3.5 absolute -top-1 -right-1 text-[10px] text-white text-center">
-              2
+              (items.length)
             </div>
+            ): (<></>)}
           </div>
           {isCartPopupOpen && <CartPopup />}
         </div>
