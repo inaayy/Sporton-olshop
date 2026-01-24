@@ -3,10 +3,10 @@ import ProductActions from "../../components/product-detail/product-actions";
 import { getProductDetail } from "@/app/services/product.service";
 import { getImageUrl } from "@/app/lib/api";
 
-type TpageProps = {
+export type TPageProps = {
   params: Promise<{id: string}>;
 }
-const ProductDetail = async ({params}: TpageProps) => {
+const ProductDetail = async ({params}: TPageProps) => {
   const {id} = await params;
 
   const product = await getProductDetail(id);

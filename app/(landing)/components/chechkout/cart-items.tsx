@@ -50,7 +50,7 @@ const CartItems = ({handlePayment}: TCartItems) => {
               <FiTrash2 />
             </Button>
           </div>
-        ))}
+        ))};
       </div>
       <div className="flex justify-between font-semibold p-4 mt-10">
         <div className="text-sm">Total</div>
@@ -62,7 +62,7 @@ const CartItems = ({handlePayment}: TCartItems) => {
           }).format(totalPrice)}
         </div>
       </div>
-      <Button variant="dark" className="w-full mt-4" onClick={() => push("/payment")}>
+      <Button type="button" variant="dark" className="w-full mt-4" onClick={handlePayment}>
         <FiCreditCard />
         Proceed to Payment
       </Button>

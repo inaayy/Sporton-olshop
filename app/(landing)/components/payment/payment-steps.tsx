@@ -5,16 +5,53 @@ import FileUpload from "../ui/file-upload";
 import Button from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { json } from "stream/consumers";
+import { useCartStore } from "@/app/hooks/use-cart-store";
+import { transactionCheckout } from "@/app/services/transaction.esrvice";
 
 const PaymentSteps = () => {
   const { push } = useRouter();
+  const { items, customerInfo, reset } = useCartStore();
   const [file, setFile] = useState<File | null>();
-  
+
+  const totalPrice = items.reduce(
+    (total, item) => total + item.price * item.qty, 0
+  );
+
   const upploadAndConfirm = () => {
-    push("/order-status/72290");
+    push("/order-st1atus/72290");
   };
 
+  const handleConfirmPayment = async() => {
+    if (!file) {
+      alert("Please upload the payment receipt before confirming.");
+      return;
+    }
+
+    if (!customerInfo) {
+      alert("Customer information is missing, please return to checkout");
+      push("/checkout");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("customerName", customerInfo.customerName);
+      formData.append("customerContact", customerInfo.customerContact!.toString());
+      formData.append("customerAddress", customerInfo.customerAddress);
+      formData.append("image", file);
+      formData.append("purchasedItems", JSON.stringify(items.map((item) => ({ productId: item._id, qty: item.qty }))));
+      formData.append("totalPayment", totalPrice!.toString());
+
+      const res = await transactionCheckout(formData);
+
+      alert('Transaction created successfully!')
+      reset();
+      push(`/order-status/${res._id}`);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <CardWithHeader title="Payment Steps">
       <div className="p-5">
@@ -46,7 +83,7 @@ const PaymentSteps = () => {
             }).format(55000)}
           </div>
         </div>
-        <Button variant="dark" className="w-full mt-4" onClick={upploadAndConfirm}>
+        <Button variant="dark" className="w-full mt-4" onClick={handleConfirmPayment}>
           <FiCheckCircle />
           Upload Receipt & Confirm
         </Button>

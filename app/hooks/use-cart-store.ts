@@ -35,7 +35,9 @@ export const useCartStore = create<CartStore>()(
 
         if (existingItem) {
           set({
-            items: items.map((item) => (item._id === product._id ? { ...item, qty: item.qty + qty } : item)),
+            items: items.map((item) => 
+            item._id === product._id ? { ...item, qty: 
+              item.qty + qty}: item),
           });
         } else {
           set({ items: [...items, { ...product, qty }] });
@@ -48,7 +50,7 @@ export const useCartStore = create<CartStore>()(
         set({ items: get().items.filter((item) => item._id !== productId) });
       },
       reset: () => {
-        set({ items: [] });
+        set({ items: [], customerInfo: null });
       },
     }),
     {

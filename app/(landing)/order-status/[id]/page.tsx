@@ -1,17 +1,26 @@
-"use client";
-import { useState } from "react";
 import OrderSubmitted from "../../components/order-status/order-submited";
 import OrderConfirmed from "../../components/order-status/order-confirmed";
+import { getTransactionById } from "@/app/services/transaction.esrvice";
+import OrderRejected from "../../components/order-status/order-rejected";
+import { TPageProps } from "../../product/[id]/page";
 
-const OrderStatus = () => {
-  const [isConfirmed, setIsConfirmed] = useState(false);
+
+const OrderStatus = async ({ params }: TPageProps) => {
+  const {id} = await params;
+
+  const transaction = await getTransactionById(id)
+  console.log("transaction", transaction);
+
+  // const [isConfirmed, setIsConfirmed] = useState(false);
 
   return (
     <main className="bg-gray-100 min-h-[80vh]">
       <div className="max-w-5xl mx-auto py-20">
         <h1 className="text-5xl font-bold text-center">Order Status</h1>
       </div>
-      {isConfirmed ? <OrderConfirmed /> : <OrderSubmitted />}
+      {transaction.status === "pending" && <OrderSubmitted /> }
+      {transaction.status === "paid" && <OrderConfirmed />}
+      {transaction.status === "rejected" && <OrderRejected />}  
     </main>
   );
 };
