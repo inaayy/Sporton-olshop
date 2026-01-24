@@ -4,10 +4,13 @@ import CardWithHeader from "../ui/card-with-header";
 import FileUpload from "../ui/file-upload";
 import Button from "../ui/button";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { json } from "stream/consumers";
 
 const PaymentSteps = () => {
   const { push } = useRouter();
-
+  const [file, setFile] = useState<File | null>();
+  
   const upploadAndConfirm = () => {
     push("/order-status/72290");
   };
@@ -26,10 +29,10 @@ const PaymentSteps = () => {
           </li>
           <li>
             Upload the payment receipt/screenshot using the <b>'Upload Receipt & Confirm'</b> button below to validate
-            your transaction.
+            your transaction. {JSON.stringify(file)}
           </li>
         </ol>
-        <FileUpload />
+        <FileUpload onFileSelect={setFile} />
       </div>
 
       <div className="border-t border-gray-200 p-4">

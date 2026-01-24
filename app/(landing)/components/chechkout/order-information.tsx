@@ -1,27 +1,52 @@
+"use client";
+import { CustomerInfo } from "@/app/hooks/use-cart-store";
 import CardWithHeader from "../ui/card-with-header";
+import { useState } from "react";
 
-const OrderInformation = () => {
+type TOrderInformation = {
+  formData: CustomerInfo;
+  setFormData: React.Dispatch<React.SetStateAction<CustomerInfo>>
+};
+
+const OrderInformation = ({ formData, setFormData }: TOrderInformation) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <CardWithHeader title="Order information">
-      {/* <div className="bg-white">
-        <div className="px-5 py-4 border-b border-gray-200">
-          <h2 className="font-bold text-lg">Order Information</h2>
-        </div> */}
-        <div className="p-5">
-          <div className="input-group">
-            <label htmlFor="full_name">Full Name</label>
-            <input type="text" placeholder="Type your full name" id="full_name" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="nomor_wa">Whatsaap Number</label>
-            <input type="text" placeholder="+62xxxxx" id="nomor_wa" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="shipping_address">Shipping Address</label>
-            <textarea placeholder="Type your shipping adsress" id="shipping_address" rows={7} />
-          </div>
+      <div className="p-5">
+        <div className="input-group">
+          <label htmlFor="customerName">Full Name</label>
+          <input
+            type="text"
+            placeholder="Type your full name"
+            name="customerName"
+            value={formData.customerName}
+            onChange={handleInputChange}
+          />
         </div>
-      {/* </div> */}
+        <div className="input-group">
+          <label htmlFor="customerContact">Whatsaap Number</label>
+          <input
+            type="text"
+            placeholder="+62xxxxx"
+            name="customerContact"
+            value={formData.customerContact}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="customerAddress">Shipping Address</label>
+          <textarea
+            placeholder="Type your shipping adsress"
+            name="customerAddress"
+            rows={7}
+            value={formData.customerAddress}
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
     </CardWithHeader>
   );
 };

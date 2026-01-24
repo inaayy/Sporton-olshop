@@ -5,21 +5,28 @@ import Button from "../ui/button";
 import { FiCreditCard, FiTrash2 } from "react-icons/fi";
 import CardWithHeader from "../ui/card-with-header";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/hooks/use-cart-store";
+import { getImageUrl } from "@/app/lib/api";
 
-const CartItems = () => {
+type TCartItems = {
+  handlePayment: () => void;
+};
+
+const CartItems = ({handlePayment}: TCartItems) => {
+  const {items, removeItem} = useCartStore();
   const { push } = useRouter();
-  const totalPrice = cartList.reduce((total, item) => total + item.price * item.qty, 0);
 
-  const payment = () => {};
+  const totalPrice = items.reduce((total, item) => total + item.price * item.qty, 0);
 
   return (
     <CardWithHeader title="Cart Items">
+      <div className="flex flex-col justify-between h-[calc(100%-70px)]">
       <div className="overflow-auto max-h-[300px]">
-        {cartList.map((item, index) => (
-          <div className="border-b border-gray-200 p-4 flex gap-3" key={index}>
+        {items.map((item, index) => (
+          <div className="border-b border-gray-200 p-4 flex gap-3" key={item._id}>
             <div className="bg-primary-light aspect-square w-16 flex justify-center itmes-center">
               <Image
-                src={`/images/products/${item.imgUrl}`}
+                src={getImageUrl(item.imageUrl)}
                 width={63}
                 height={63}
                 alt={item.name}
@@ -39,7 +46,7 @@ const CartItems = () => {
                 </div>
               </div>
             </div>
-            <Button size="small" variant="ghost" className="w7 h-7 p-0! self-center ml-auto">
+            <Button size="small" variant="ghost" className="w7 h-7 p-0! self-center ml-auto" onClick={() => removeItem(item._id)}>
               <FiTrash2 />
             </Button>
           </div>
@@ -59,7 +66,9 @@ const CartItems = () => {
         <FiCreditCard />
         Proceed to Payment
       </Button>
+      </div>
     </CardWithHeader>
+
   );
 };
 
