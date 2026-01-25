@@ -9,7 +9,9 @@ type TOrderInformation = {
 };
 
 const OrderInformation = ({ formData, setFormData }: TOrderInformation) => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -21,6 +23,7 @@ const OrderInformation = ({ formData, setFormData }: TOrderInformation) => {
           <input
             type="text"
             placeholder="Type your full name"
+            id="cusotomerName"
             name="customerName"
             value={formData.customerName}
             onChange={handleInputChange}
@@ -31,6 +34,7 @@ const OrderInformation = ({ formData, setFormData }: TOrderInformation) => {
           <input
             type="text"
             placeholder="+62xxxxx"
+            id="customerContact"
             name="customerContact"
             value={formData.customerContact ?? ""}
             onChange={handleInputChange}
@@ -40,6 +44,7 @@ const OrderInformation = ({ formData, setFormData }: TOrderInformation) => {
           <label htmlFor="customerAddress">Shipping Address</label>
           <textarea
             placeholder="Type your shipping adsress"
+            id="customerAddress"
             name="customerAddress"
             rows={7}
             value={formData.customerAddress}
