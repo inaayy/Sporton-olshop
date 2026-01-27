@@ -26,7 +26,7 @@ const Sidebar = () => {
         {
             name: "Bank Information",
             icon: FiCreditCard,
-            link: "/admin/bank-information",
+            link: "/admin/bank-info",
         },
     ];
 

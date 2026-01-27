@@ -3,44 +3,34 @@ import ImageUploadPreview from "../ui/image-upload-preview";
 import Modal from "../ui/modal";
 import Button from "@/app/(landing)/components/ui/button";
 
-type TCategoryModalProps = {
+type TBankInfoModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-const CategoryModal = ({ isOpen, onClose }: TCategoryModalProps) => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+const BankInfoModal = ({ isOpen, onClose }: TBankInfoModalProps) => {
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add New Category">
-      <div className="flex flex-col gap-6">
-        <div className="flex gap-7">
-          <div className="min-w-50">
-            <ImageUploadPreview
-              label="Category Image"
-              value={imagePreview}
-              onChange={(file) => {
-                setImageFile(file);
-                setImagePreview(URL.createObjectURL(file));
-              }}
-            />
+    <Modal isOpen={isOpen} onClose={onClose} title="Add Bank Accocunt">
+      <div className="flex gap-6">
+        <div className="flex flex-col gap-4 w-full">
+          <div className="input-group-admin">
+            <label htmlFor="bankName">Bank Name</label>
+            <input type="text" id="bankName" name="bankName" placeholder="e. g. Madiri, BCA, BRI" />
           </div>
-          <div className="flex flex-col gap-4 w-full">
-            <div className="input-group-admin">
-              <label htmlFor="categoryName">Category Name</label>
-              <input type="text" id="categoryName" name="categoryName" placeholder="e. g. Running Shoes" />
-            </div>
-            <div className="input-group-admin">
-              <label htmlFor="description">Description</label>
-              <textarea name="description" id="description" rows={4} placeholder="Product Details..."></textarea>
-            </div>
-            <Button className="ml-auto mt-3 rounded-lg">Create Category</Button>
+          <div className="input-group-admin">
+            <label htmlFor="accountNumber">Account Name</label>
+            <input type="text" id="accountNumber" name="accountNumber" placeholder="2198099719" />
           </div>
+          <div className="input-group-admin">
+            <label htmlFor="accountHolder">Account Holder</label>
+            <input type="text" id="accountHolder" name="accountHolder" placeholder="Holder Name as registered on the account" />
+          </div>
+          <Button className="ml-auto mt-3 rounded-lg">Add Bank Account</Button>
         </div>
       </div>
     </Modal>
   );
 };
 
-export default CategoryModal;
+export default BankInfoModal;
