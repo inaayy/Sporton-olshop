@@ -3,29 +3,6 @@ import { Product } from "@/app/types";
 import Image from "next/image";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
-// const productData = [
-//   {
-//     name: "SportOn Product 1",
-//     imageUrl: "/images/products/sepatu-1.svg",
-//     category: "Running Shoes",
-//     price: 289000,
-//     stock: 5,
-//   },
-//   {
-//     name: "SportOn Product 2",
-//     imageUrl: "/images/products/basketball.svg",
-//     category: "Basket",
-//     price: 278000,
-//     stock: 8,
-//   },
-//   {
-//     name: "SportOn Product 3",
-//     imageUrl: "/images/products/tennis.svg",
-//     category: "Tennis",
-//     price: 270000,
-//     stock: 7,
-//   },
-// ];
 
 type TProductTableProps = {
   products: Product[];
