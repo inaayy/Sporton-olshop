@@ -25,9 +25,8 @@ export function getImageUrl(path: string) {
 }
 
 export function getAuthHeaders() {
-    const token = localStorage.getItem("token");
-    return {
-        Authorization: `Bearer ${token}`,
-
-    }
+  const token = localStorage.getItem("token");
+  return {
+    Authorization: `Bearer ${token}`,
+  };
 }

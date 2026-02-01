@@ -5,7 +5,7 @@ export const getAllCategories = async (): Promise<Category[]> => {
     return await fetchAPI<Category[]>("/categories");
 };
 
-export const creatCategory = async (data: FormData): Promise<Category> => {
+export const createCategory = async (data: FormData): Promise<Category> => {
     return await fetchAPI<Category>("/categories", {
         method: "POST",
         headers: {

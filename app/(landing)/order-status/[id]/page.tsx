@@ -1,6 +1,6 @@
 import OrderSubmitted from "../../components/order-status/order-submited";
 import OrderConfirmed from "../../components/order-status/order-confirmed";
-import { getTransactionById } from "@/app/services/transaction.esrvice";
+import { getTransactionById } from "@/app/services/transaction.service";
 import OrderRejected from "../../components/order-status/order-rejected";
 import { TPageProps } from "../../product/[id]/page";
 

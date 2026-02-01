@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
+      <body className={`${poppins.variable} antialased`}>
         <div className="flex min-h-screen bg-white">
           <Sidebar />
           <main className="flex-1 ml-80 p-14 bg-[#F7F9FA] min-h-screen">

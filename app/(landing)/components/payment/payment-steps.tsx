@@ -6,7 +6,7 @@ import Button from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCartStore } from "@/app/hooks/use-cart-store";
-import { transactionCheckout } from "@/app/services/transaction.esrvice";
+import { transactionCheckout } from "@/app/services/transaction.service";
 
 const PaymentSteps = () => {
   const { push } = useRouter();

@@ -4,7 +4,7 @@ import Modal from "../ui/modal";
 import Button from "@/app/(landing)/components/ui/button";
 import { Category } from "@/app/types";
 import { getImageUrl } from "@/app/lib/api";
-import { creatCategory, updateCategory } from "@/app/services/category.service";
+import { createCategory, updateCategory } from "@/app/services/category.service";
 import { toast } from "react-toastify";
 
 type TCategoryModalProps = {
@@ -66,10 +66,14 @@ const CategoryModal = ({ isOpen, onClose, onSuccess, category }: TCategoryModalP
       if (isEditMode) {
         await updateCategory(category._id, data);
       } else {
-        await creatCategory(data);
+        await createCategory(data);
       }
 
-      toast.success(isEditMode ? "Category updated successfully" : "category created successfully");
+      toast.success(
+        isEditMode
+          ? "Category updated successfully"
+          : "Category created successfully",
+      );
 
       setFormData({
         name: "",
@@ -81,8 +85,12 @@ const CategoryModal = ({ isOpen, onClose, onSuccess, category }: TCategoryModalP
       onSuccess?.();
       onClose();
     } catch (error) {
-      console.error(isEditMode ? "Failed to update category" : "Failed to create category");
-      toast.error(isEditMode ? "Failed to update category" : "Failed to create category");
+      console.error(
+        isEditMode ? "Failed to update category" : "Failed to create category",
+      );
+      toast.error(
+        isEditMode ? "Failed to update category" : "Failed to create category",
+      );
     } finally {
       setIsSubmitting(false);
     }
